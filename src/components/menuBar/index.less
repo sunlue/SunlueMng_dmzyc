@@ -1,0 +1,55 @@
+.menu-bar {
+	width: 80px;
+	height: 100%;
+	background: #082671;
+	.logo {
+		width: 100%;
+		height: 60px;
+		background: #441e8c;
+		padding: 10px;
+		box-sizing: border-box;
+		text-align: center;
+		img{
+			height: 100%;
+		}
+	}
+	ul.nav {
+		li {
+			text-align: center;
+			padding: 20px 0px;
+			cursor: pointer;
+			transition: all 0.3s;
+			i.iconfont {
+				display: block;
+				font-size: 38px;
+				color: white;
+				margin: 0 auto;
+			}
+			span.name {
+				color: white;
+			}
+			&:hover {
+				background: rgba(15, 28, 55, 0.5);
+				i.iconfont {
+					animation-name: menuBarHover;
+					animation-duration: 500ms;
+					animation-timing-function: linear;
+					animation-delay: 0;
+					animation-iteration-count: 1;
+					animation-direction: normal;
+				}
+			}
+			&.active {
+				background: #0f1c37;
+			}
+		}
+	}
+}
+
+@keyframes menuBarHover{
+	0% {transform: scale(1)}
+	25% {transform: scale(0.9)}
+	50% {transform: scale(1)}
+	75% {transform: scale(1.2)}
+	100% {transform: scale(1)}
+}
