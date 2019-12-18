@@ -30,7 +30,7 @@
 							<s-parking></s-parking>
 						</panel>
 						<panel title="事件处理" title_en="The event processing" class="mt">
-							<s-event></s-event>
+							<s-event ref="event"></s-event>
 						</panel>
 						<panel title="视频监控" title_en="Video monitoring" class="mt">
 							<s-monitor></s-monitor>
@@ -71,11 +71,15 @@ export default {
 	},
 	data() {
 		return {
-			number:'258136'
+			number:Math.ceil(Math.random() * 1000000)
 		};
 	},
 	mounted() {
-		// this.receiveNumber()
+		let that=this;
+		this.receiveNumber()
+		setTimeout(function() {
+			that.$refs.event.eventCome()
+		}, 3000);
 	},
 	methods:{
 		receiveNumber(){

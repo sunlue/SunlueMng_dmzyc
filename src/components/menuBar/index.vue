@@ -5,7 +5,7 @@
 		</div>
 		<ul class="nav">
 			<template v-for="(item, index) in nav">
-				<li :class="index == active ? 'active' : ''" :key="index" @click="click(item,index)">
+				<li :class="item.href == active ? 'active' : ''" :key="index" @click="click(item,index)">
 					<i :class="['iconfont', item.icon]"></i>
 					<span class="name">{{ item.name }}</span>
 				</li>
@@ -18,8 +18,9 @@
 import './index.less';
 export default {
 	data() {
+		let that=this;
 		return {
-			active: 0,
+			active: that.$route.name,
 			nav: [
 				{
 					name: '综合展示',
@@ -49,12 +50,18 @@ export default {
 			]
 		};
 	},
+	watch:{
+		'$route.name'(val){
+			this.active=val
+		}
+	},
 	methods: {
 		click(item,index) {
-			this.active=index
-			this.$router.replace({
-				name: item.href
-			});
+			if(this.active!=item.href){
+				this.$router.replace({
+					name: item.href
+				});
+			}
 		}
 	}
 };

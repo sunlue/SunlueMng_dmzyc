@@ -1,6 +1,6 @@
 <template>
 	<div class="event">
-		<Table :columns="table.column" :data="table.data" size="small" class="table"></Table>
+		<Table :columns="table.column" :data="table.data" size="small" class="table" :height="400"></Table>
 		<Modal v-model="result.show" :title="result.title">
 			<Timeline>
 				<template v-for="(item, index) in result.step">
@@ -136,6 +136,55 @@ export default {
 						type: '设备损坏',
 						level: 'Ⅱ级',
 						address: '游客中心',
+						status: 1
+					},
+					{
+						name: '气象台黄色暴雨预警',
+						type: '预警',
+						level: '黄色',
+						address: '崇州',
+						status: 1
+					},
+					{
+						name: '气象台黄色暴雨预警',
+						type: '预警',
+						level: '黄色',
+						address: '崇州',
+						status: 1
+					},
+					{
+						name: '气象台黄色暴雨预警',
+						type: '预警',
+						level: '黄色',
+						address: '崇州',
+						status: 1
+					},
+					{
+						name: '气象台黄色暴雨预警',
+						type: '预警',
+						level: '黄色',
+						address: '崇州',
+						status: 1
+					},
+					{
+						name: '气象台黄色暴雨预警',
+						type: '预警',
+						level: '黄色',
+						address: '崇州',
+						status: 1
+					},
+					{
+						name: '气象台黄色暴雨预警',
+						type: '预警',
+						level: '黄色',
+						address: '崇州',
+						status: 1
+					},
+					{
+						name: '气象台黄色暴雨预警',
+						type: '预警',
+						level: '黄色',
+						address: '崇州',
 						status: 1
 					},
 					{

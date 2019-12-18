@@ -14,19 +14,19 @@
 			</div>
 			<div class="content">
 				<div class="box-left">
-					<a class="box" href="javascript:alert('停车场正在建设中...');">
+					<router-link :to="{name:'parking'}" class="box">
 						<span>停车场管理系统</span>
 						<img src="../assets/list1_icon.png" class="icon" />
-					</a>
+					</router-link>
 				</div>
 				<div class="box-right">
 					<div class="box-top">
-						<a href="http://admin.fxnsjq.sunlue.com" class="box-left  box">
-							<span>内容管理系统</span>
+						<router-link :to="{name:'main'}" class="box-left  box">
+							<span>综合管理系统</span>
 							<img src="../assets/list2_icon.png" class="icon" />
-						</a>
-						<router-link :to="{name:'main'}" class="box-right  box">
-							<span>客流监控数据分析</span>
+						</router-link>
+						<router-link :to="{name:'monitor'}" class="box-right  box">
+							<span>视频监控系统</span>
 							<img src="../assets/list3_icon.png" class="icon" />
 						</router-link>
 					</div>
@@ -35,8 +35,8 @@
 							<span>环境检测<br />及天气质量</span>
 							<img src="../assets/list4_icon.png" class="icon" />
 						</router-link>
-						<router-link :to="{name:'site'}" class="box-right  box">
-							<span>网站访问统计</span>
+						<router-link :to="{name:'dispatch'}" class="box-right  box">
+							<span>应急指挥调度</span>
 							<img src="../assets/list5_icon.png" class="icon" />
 						</router-link>
 					</div>

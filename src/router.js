@@ -22,6 +22,10 @@ export default new Router({
 			name: 'monitor',
 			component: () => import('./views/monitor')
 		}, {
+			path: '/parking',
+			name: 'parking',
+			component: () => import('./views/parking')
+		}, {
 			path: '/dispatch',
 			name: 'dispatch',
 			component: () => import('./views/dispatch')

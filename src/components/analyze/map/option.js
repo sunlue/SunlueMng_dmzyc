@@ -1,6 +1,7 @@
 const option = {
 	point: function() {
 		return {
+			'竹艺村': [103.597591, 30.656279],
 			'海门': [121.15, 31.89],
 			'鄂尔多斯': [109.781327, 39.608266],
 			'招远': [120.38, 37.35],
@@ -193,25 +194,165 @@ const option = {
 			'大庆': [125.03, 46.58]
 		};
 	},
-	convertData: function(data) {
-		let geoCoordMap = this.point();
-		var result = [];
-		for (var i = 0; i < data.length; i++) {
-			var geoCoord = geoCoordMap[data[i].name];
-			if (geoCoord) {
-				result.push({
-					name: data[i].name,
-					value: geoCoord.concat(data[i].value)
-				});
+	bmap: function() {
+		return {
+			// center: [104.114129, 37.550339],
+			center:[103.597591, 30.656279],
+			zoom: 5,
+			roam: true,
+			mapStyle: {
+				styleJson: [{
+						"featureType": "water",
+						"elementType": "all",
+						"stylers": {
+							"color": "#044161"
+						}
+					},
+					{
+						"featureType": "land",
+						"elementType": "all",
+						"stylers": {
+							"color": "#004981"
+						}
+					},
+					{
+						"featureType": "boundary",
+						"elementType": "geometry",
+						"stylers": {
+							"color": "#064f85"
+						}
+					},
+					{
+						"featureType": "railway",
+						"elementType": "all",
+						"stylers": {
+							"visibility": "off"
+						}
+					},
+					{
+						"featureType": "highway",
+						"elementType": "geometry",
+						"stylers": {
+							"color": "#004981"
+						}
+					},
+					{
+						"featureType": "highway",
+						"elementType": "geometry.fill",
+						"stylers": {
+							"color": "#005b96",
+							"lightness": 1
+						}
+					},
+					{
+						"featureType": "highway",
+						"elementType": "labels",
+						"stylers": {
+							"visibility": "off"
+						}
+					},
+					{
+						"featureType": "arterial",
+						"elementType": "geometry",
+						"stylers": {
+							"color": "#004981"
+						}
+					},
+					{
+						"featureType": "arterial",
+						"elementType": "geometry.fill",
+						"stylers": {
+							"color": "#00508b"
+						}
+					},
+					{
+						"featureType": "poi",
+						"elementType": "all",
+						"stylers": {
+							"visibility": "off"
+						}
+					},
+					{
+						"featureType": "green",
+						"elementType": "all",
+						"stylers": {
+							"color": "#056197",
+							"visibility": "off"
+						}
+					},
+					{
+						"featureType": "subway",
+						"elementType": "all",
+						"stylers": {
+							"visibility": "off"
+						}
+					},
+					{
+						"featureType": "manmade",
+						"elementType": "all",
+						"stylers": {
+							"visibility": "off"
+						}
+					},
+					{
+						"featureType": "local",
+						"elementType": "all",
+						"stylers": {
+							"visibility": "off"
+						}
+					},
+					{
+						"featureType": "arterial",
+						"elementType": "labels",
+						"stylers": {
+							"visibility": "off"
+						}
+					},
+					{
+						"featureType": "boundary",
+						"elementType": "geometry.fill",
+						"stylers": {
+							"color": "#029fd4"
+						}
+					},
+					{
+						"featureType": "building",
+						"elementType": "all",
+						"stylers": {
+							"color": "#1a5787"
+						}
+					},
+					{
+						"featureType": "label",
+						"elementType": "all",
+						"stylers": {
+							"visibility": "off"
+						}
+					}
+				]
 			}
-		}
-		return result;
+		};
 	},
 	map: function(data) {
+		let geoCoordMap = this.point();
+		var convertData = function(data) {
+			var result = [];
+			for (var i = 0; i < data.length; i++) {
+				var geoCoord = geoCoordMap[data[i].name];
+				if (geoCoord) {
+					result.push({
+						name: data[i].name,
+						value: geoCoord.concat(data[i].value)
+					});
+				}
+			}
+			return result;
+		}
+
 		return {
 			backgroundColor: 'transparent',
 			title: {
-				show:false,
+				show: false,
 				text: '主要游客来源',
 				subtext: 'Source of tourists',
 				textStyle: {
@@ -357,7 +498,7 @@ const option = {
 			series: [{
 					type: 'scatter',
 					coordinateSystem: 'bmap',
-					data: this.convertData(data),
+					data: convertData(data),
 					symbolSize: function(val) {
 						return val[2] / 10;
 					},
@@ -380,7 +521,7 @@ const option = {
 				{
 					type: 'effectScatter',
 					coordinateSystem: 'bmap',
-					data: this.convertData(data.sort(function(a, b) {
+					data: convertData(data.sort(function(a, b) {
 						return b.value - a.value;
 					}).slice(0, 10)),
 					symbolSize: function(val) {
@@ -410,6 +551,232 @@ const option = {
 			]
 		};
 	},
+	ship: function() {
+		var CZData = [
+			[{
+				name: '福州',
+				value: 95
+			}, {
+				name: '竹艺村'
+			}],
+			[{
+				name: '太原',
+				value: 90
+			}, {
+				name: '竹艺村'
+			}],
+			[{
+				name: '北京',
+				value: 90
+			}, {
+				name: '竹艺村'
+			}],
+			[{
+				name: '上海',
+				value: 90
+			}, {
+				name: '竹艺村'
+			}],
+			[{
+				name: '广州',
+				value: 90
+			}, {
+				name: '竹艺村'
+			}],
+			[{
+				name: '杭州',
+				value: 90
+			}, {
+				name: '竹艺村'
+			}],
+			[{
+				name: '绵阳',
+				value: 90
+			}, {
+				name: '竹艺村'
+			}],
+			[{
+				name: '拉萨',
+				value: 90
+			}, {
+				name: '竹艺村'
+			}],
+			[{
+				name: '乌鲁木齐',
+				value: 10
+			}, {
+				name: '竹艺村'
+			}]
+		];
+
+		let geoCoordMap = this.point();
+		var convertData = function(data) {
+			var result = [];
+			for (var i = 0; i < data.length; i++) {
+				var dataItem = data[i];
+				var fromCoord = geoCoordMap[dataItem[0].name];
+				var toCoord = geoCoordMap[dataItem[1].name];
+				if (fromCoord && toCoord) {
+					result.push({
+						fromName: dataItem[0].name,
+						toName: dataItem[1].name,
+						coords: [fromCoord, toCoord]
+					});
+				}
+			}
+			return result;
+		};
+
+		var planePath =
+			'path://M1705.06,1318.313v-89.254l-319.9-221.799l0.073-208.063c0.521-84.662-26.629-121.796-63.961-121.491c-37.332-0.305-64.482,36.829-63.961,121.491l0.073,208.063l-319.9,221.799v89.254l330.343-157.288l12.238,241.308l-134.449,92.931l0.531,42.034l175.125-42.917l175.125,42.917l0.531-42.034l-134.449-92.931l12.238-241.308L1705.06,1318.313z';
+		return {
+			backgroundColor: 'transparent',
+			bmap: this.bmap(),
+			series: [{
+					name: '竹艺村',
+					type: 'effectScatter',
+					coordinateSystem: 'bmap',
+					zlevel: 2,
+					rippleEffect: {
+						brushType: 'stroke'
+					},
+					label: {
+						normal: {
+							show: true,
+							position: 'top',
+							formatter: '{b}'
+						}
+					},
+					symbolSize: 16,
+					showEffectOn: 'render',
+					itemStyle: {
+						normal: {
+							color: 'white'
+						}
+					},
+					data: [{
+						name: '道明·竹艺村',
+						value: geoCoordMap['竹艺村'].concat([100])
+					}]
+				},
+				//航线
+				{
+					name: '',
+					type: 'lines',
+					coordinateSystem: 'bmap',
+					zlevel: 1,
+					effect: {
+						show: true,
+						period: 6,
+						trailLength: 0.7,
+						color: '#fff',
+						symbolSize: 3
+					},
+					lineStyle: {
+						normal: {
+							color: '#f4e925',
+							width: 1,
+							curveness: 0.2
+						}
+					},
+					data: convertData(CZData)
+				},
+				//飞机
+				{
+					name: '',
+					type: 'lines',
+					coordinateSystem: 'bmap',
+					zlevel: 2,
+					effect: {
+						show: true,
+						period: 6,
+						trailLength: 0,
+						symbol: planePath,
+						symbolSize: 15
+					},
+					lineStyle: {
+						normal: {
+							color: '#f4e925',
+							width: 1,
+							opacity: 0.4,
+							curveness: 0.2
+						}
+					},
+					data: convertData(CZData)
+				},
+				{
+					name: '基础数据',
+					type: 'scatter',
+					coordinateSystem: 'bmap',
+					data: CZData.map(function(dataItem) {
+						return {
+							name: dataItem[0].name,
+							value: geoCoordMap[dataItem[0].name].concat([dataItem[0].value])
+						};
+					}),
+					symbolSize: function(val) {
+						let diff = val[2] / 10;
+						return diff < 8 ? 8 : diff;
+					},
+					label: {
+						normal: {
+							show: false,
+							position: 'right',
+							formatter: function(params) {
+								let value = params.data.value
+								return params.data.name + ':' + value[2];
+							}
+						},
+						emphasis: {
+							show: true
+						}
+					},
+					itemStyle: {
+						normal: {
+							color: '#ddb926'
+						}
+					}
+				},
+				{
+					name: ' 前五',
+					type: 'effectScatter',
+					coordinateSystem: 'bmap',
+					zlevel: 2,
+					rippleEffect: {
+						brushType: 'stroke'
+					},
+					label: {
+						normal: {
+							show: true,
+							position: 'right',
+							formatter: function(params) {
+								let value = params.data.value
+								return params.data.name + ':' + value[2];
+							}
+						}
+					},
+					symbolSize: function(val) {
+						return val[2] / 4;
+					},
+					showEffectOn: 'render',
+					itemStyle: {
+						normal: {
+							color: '#f4e925'
+						}
+					},
+					data: CZData.sort(function(a, b) {
+						return b.value - a.value;
+					}).slice(0, 6).map(function(dataItem) {
+						return {
+							name: dataItem[0].name,
+							value: geoCoordMap[dataItem[0].name].concat([dataItem[0].value])
+						};
+					})
+				}
+			]
+		};
+
+	}
 }
 
 export default option;

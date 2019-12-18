@@ -6,11 +6,13 @@
 		</div>
 		<ul class="box-item">
 			<template v-for="(item, index) in numberArray">
-				<li :class="{ 'number-item': !isNaN(item), 'mark-item': isNaN(item) }" :key="index">
+				<li ref="numberBox" :class="{ 'number-item': !isNaN(item), 'mark-item': isNaN(item) }" :key="index">
 					<div v-if="!isNaN(item)">
-						<i ref="numberItem">0123456789</i>
+						<i :ref="'numberItem'+index">0123456789</i>
 					</div>
-					<div class="comma" v-else>{{ item }}</div>
+					<div class="comma" v-else>
+						<i ref="comma">{{ item }}</i>
+					</div>
 				</li>
 			</template>
 			<li class="unit">
@@ -68,13 +70,15 @@ export default {
 		},
 		// 设置文字滚动
 		setNumberTransform() {
-			const numberItems = this.$refs.numberItem; // 拿到数字的ref，计算元素数量
-			const numberArr = this.numberArray.filter(item => !isNaN(item));
-			// 结合CSS 对数字字符进行滚动,显示数量
-			for (let index = 0; index < numberItems.length; index++) {
-				const elem = numberItems[index];
-				elem.style.transform = `translate(-50%, -${numberArr[index] * 10}%)`;
-			}
+			this.$nextTick(function(){
+				for(let i =0;i<this.numberArray.length;i++){
+					const number=this.numberArray[i];
+					const elem = this.$refs['numberItem'+i];
+					if(elem.length>0){
+						elem[0].style.transform = `translate(-50%, -${number * 10}%)`
+					}
+				}
+			})
 		}
 	}
 };

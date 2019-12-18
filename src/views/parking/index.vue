@@ -22,7 +22,7 @@ export default {
 		};
 	},
 	mounted() {
-		analyze.map.ship(data).then(result => {
+		analyze.map.map(data).then(result => {
 			this.initMap(result);
 		});
 	},
@@ -35,8 +35,8 @@ export default {
 				.getModel()
 				.getComponent('bmap')
 				.getBMap();
-			this.bmap.setMinZoom(3); // 设置地图最小缩放比例
-			this.bmap.setMaxZoom(6); // 设置地图最大缩放比例
+			this.bmap.setMinZoom(5); // 设置地图最小缩放比例
+			this.bmap.setMaxZoom(5); // 设置地图最大缩放比例
 			const _this = this;
 			// 监听地图比例缩放， 可以根据缩放等级控制某些图标的显示
 			this.bmap.addEventListener('zoomend', function() {
@@ -76,7 +76,7 @@ export default {
 				position: absolute;
 				background-position: center;
 				background-repeat: no-repeat;
-				background-image: url('../../../assets/main/notice.png');
+				background-image: url('../../assets/main/notice.png');
 			}
 		}
 	}

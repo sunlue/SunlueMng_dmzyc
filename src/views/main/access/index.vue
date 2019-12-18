@@ -4,12 +4,10 @@
 			<Col span="12" :key="i">
 				<Card :key="i">
 					<p slot="title">
-						<strong>》</strong>
 						<template v-if="i==1">官网访问数</template>
 						<template v-if="i==2">官网浏览量</template>
 						<template v-if="i==3">微信访问数</template>
 						<template v-if="i==4">微信粉丝数</template>
-						<strong>《</strong>
 					</p>
 					<Row>
 						<Col span="12">
@@ -53,13 +51,20 @@
 				border-bottom: 2px solid rgba(145, 233, 255, 0.2);
 				padding: 10px;
 				p{
-					color: rgb(1,164,192);
+					color: #07dbff;
 					font-weight: bold;
-					text-align: center;
 					position: relative;
-					strong{
-						color: rgb(0,100,250);
-						padding: 0 10px;
+					&:after{
+						top: 0px;
+						left: 88px;
+						width: 72px;
+						height: 20px;
+						content: '';
+						display: block;
+						position: absolute;
+						background-image: url('../../../assets/main/access/gif.png');
+						background-repeat: no-repeat;
+						background-position: center center;
 					}
 				}
 			}

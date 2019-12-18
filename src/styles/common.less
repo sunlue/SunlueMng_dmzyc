@@ -30,6 +30,26 @@ a {
 	text-decoration: none;
 }
 
-.text-center{
+.text-center {
 	text-align: center;
+}
+
+.echarts,
+.echarts > div:first-child,
+.echarts > div > canvas {
+	width: 100% !important;
+	height: 100% !important;
+}
+
+::-webkit-scrollbar-track-piece {
+	background-color: transparent;
+}
+::-webkit-scrollbar {
+	width: 5px;
+	height: 5px;
+	background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+	border-radius: 5px;
+	background-color: hsla(220, 4%, 58%, 0.3);
 }
