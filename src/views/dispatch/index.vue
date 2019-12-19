@@ -101,7 +101,7 @@
 		mounted() {
 			this.receiveNumber();
 			// this.$refs.event.eventCome()
-			analyze.dispatch.trend().then(result=>{
+			analyze.dispatch.trend([120, 132, 101, 134, 90, 230, 210, 134, 90, 230, 210, 122]).then(result=>{
 				this.echart.trend=result
 			})
 			analyze.dispatch.proportion().then(result=>{

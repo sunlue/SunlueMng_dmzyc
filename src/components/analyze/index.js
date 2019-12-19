@@ -4,6 +4,7 @@ import weather from "./weather"
 import map from "./map"
 import tourists from "./tourists"
 import dispatch from "./dispatch"
+import parking from "./parking"
 const method = {
 	weather: {
 		air: function(params) {
@@ -94,6 +95,26 @@ const method = {
 		proportion:function(params){
 			return new Promise((resolve, reject) => {
 				dispatch.proportion(params).then(response => {
+					resolve(response);
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		}
+	},
+	parking:{
+		staytime:function(params){
+			return new Promise((resolve, reject) => {
+				parking.staytime(params).then(response => {
+					resolve(response);
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		month:function(params){
+			return new Promise((resolve, reject) => {
+				parking.month(params).then(response => {
 					resolve(response);
 				}).catch(error => {
 					reject(error)

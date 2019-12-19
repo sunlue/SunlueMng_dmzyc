@@ -56,7 +56,7 @@ export default {
 		}
 	},
 	methods: {
-		click(item,index) {
+		click(item) {
 			if(this.active!=item.href){
 				this.$router.replace({
 					name: item.href

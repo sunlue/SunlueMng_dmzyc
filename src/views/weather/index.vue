@@ -1,29 +1,46 @@
 <template>
 	<div class="weather">
-		<div class="box-main">
-			<div class="air box"><v-chart :options="weather.air" :autoresize="true" /></div>
-			<div class="box tem"><v-chart :options="weather.tem" :autoresize="true" /></div>
-			<div class="box humidity"><v-chart :options="weather.humidity" :autoresize="true" /></div>
-		</div>
-		<div class="box-main">
-			<div class="box"><v-chart :options="weather.weather" :autoresize="true" /></div>
-			<div class="box"><v-chart :options="weather.hours" :autoresize="true" /></div>
-		</div>
+		<Row :gutter="10" class="h100">
+			<Col span="4" class="left h100">
+				<panel title="环境质量" title_en="Environmental quality (PM2.5)">
+					<v-chart :options="weather.air" :autoresize="true" />
+				</panel>
+				<panel title="当前温度" title_en="Current temperature (℃)" class="mt">
+					<v-chart :options="weather.tem" :autoresize="true" />
+				</panel>
+				<panel title="当前湿度" title_en="Current humidity (%)" class="mt">
+					<v-chart :options="weather.humidity" :autoresize="true" />
+				</panel>
+			</Col>
+			<Col span="16" class="right h100">
+				<panel title="未来7天天气预报" title_en="Weather forecast for the next 7 days">
+					<v-chart :options="weather.weather" :autoresize="true" />
+				</panel>
+				<panel title="当日24小时温度" title_en="24 hour temperature" class="mt">
+					<v-chart :options="weather.hours" :autoresize="true" />
+				</panel>
+			</Col>
+		</Row>
 	</div>
 </template>
 
 <script>
-import axios from 'axios';
 import analyze from '@/components/analyze';
+import panel from '@/components/panel';
 export default {
+	components: {
+		panel
+	},
 	data() {
 		return {
-			year: '0',
-			month: '0',
-			day: '0',
-			week: '0',
-			time: '0',
-			weekText: ['天', '一', '二', '三', '四', '五', '六'],
+			params : {
+				appid: '74669544',
+				appsecret: 'L4uImetj',
+				cityid: '101272106',
+				lng: '105.826194',
+				lat: '32.432276',
+				vue: 1
+			},
 			weather: {
 				air: {},
 				tem: {},
@@ -34,89 +51,66 @@ export default {
 		};
 	},
 	created() {
-		let that=this;
-		this.getDateTime();
-		this.getWeather();
-		setInterval(function(){
-			that.getWeather();
-		},1000*60*30)
+		let that = this;
+		// this.getWeather();
+		setInterval(function() {
+			// that.getWeather();
+		}, 1000 * 60 * 30);
+	},
+	mounted() {
+		let v6=this.$store.getters.weather_v6;
+		let v9=this.$store.getters.weather_v9;
+		if (v6.city!=undefined) {
+			this.renderV6(v6)
+		} else{
+			this.getWeatherV6((result)=>{
+				this.renderV6(result)
+			})
+		}
+		if (v9.city!=undefined) {
+			this.renderV9(v9)
+		} else{
+			this.getWeatherV9((result)=>{
+				this.renderV9(result)
+			})
+		}
 	},
 	methods: {
-		getDateTime() {
-			let date = new Date();
-			this.year = date.getFullYear();
-			this.month = date.getMonth() + 1;
-			this.day = date.getDate();
-			this.week = date.getDay();
-			let h = date.getHours(),
-				m = date.getMinutes(),
-				s = date.getSeconds();
-			this.time = (h < 10 ? '0' + h : h) + '时' + (m < 10 ? '0' + m : m) + '分' + (s < 10 ? '0' + s : s) + '秒';
-			setTimeout(() => {
-				this.getDateTime();
-			}, 1000);
+		renderV6(result){
+			analyze.weather.air({
+				name: result.air_level,
+				value: result.air_pm25
+			}).then(data => {
+				this.weather.air = data;
+			});
+			analyze.weather.tem({
+				value: result.tem
+			}).then(data => {
+				this.weather.tem = data;
+			});
+			analyze.weather.humidity({
+				value: result.humidity
+			}).then(data => {
+				this.weather.humidity = data;
+			});
 		},
-		getWeather() {
-			let url = 'https://www.tianqiapi.com/api/';
-			let params = {
-				appid: '74669544',
-				appsecret: 'L4uImetj',
-				cityid: '101272106',
-				lng: '105.826194',
-				lat: '32.432276'
-			};
-			axios.all([
-				axios.get(url + '?version=v6', {
-					params: params
-				}),
-				axios.get(url + '?version=v9', {
-					params: params
-				})
-			]).then(
-				axios.spread((acct, perms) => {
-					analyze.weather
-						.air({
-							today: acct.data,
-							future: perms.data
-						})
-						.then(data => {
-							this.weather.air = data;
-						});
-
-					analyze.weather
-						.tem({
-							today: acct.data,
-							future: perms.data
-						})
-						.then(data => {
-							this.weather.tem = data;
-						});
-					analyze.weather
-						.humidity({
-							today: acct.data,
-							future: perms.data
-						})
-						.then(data => {
-							this.weather.humidity = data;
-						});
-					analyze.weather
-						.weather({
-							today: acct.data,
-							future: perms.data
-						})
-						.then(data => {
-							this.weather.weather = data;
-						});
-					analyze.weather
-						.hours({
-							today: acct.data,
-							future: perms.data
-						})
-						.then(data => {
-							this.weather.hours = data;
-						});
-				})
-			);
+		renderV9(result){
+			analyze.weather.weather(result.data).then(data => {
+				this.weather.weather = data;
+			});
+			analyze.weather.hours(result.data[0]['hours']).then(data => {
+				this.weather.hours = data;
+			});
+		},
+		getWeatherV6(callback) {
+			this.$store.dispatch('weather_v6', this.params).then(result => {
+				callback(result)
+			});
+		},
+		getWeatherV9(callback) {
+			this.$store.dispatch('weather_v9', this.params).then(result => {
+				callback(result)
+			});
 		}
 	}
 };
@@ -124,47 +118,29 @@ export default {
 
 <style lang="less">
 .weather {
-	width: 100%;
-	height: 100%;
 	padding: 10px;
-	.box-main {
-		float: left;
+
+	.h100 {
 		height: 100%;
-		&:first-child {
-			width: 25%;
-			.box {
-				width: calc(100% - 10px);
-				height: calc(100% / 3 - 10px);
-			}
-		}
-		&:last-child {
-			width: 75%;
-			.box {
-				&:first-child {
-					height: calc(100% / 3 * 2 - 10px);
-				}
-				&:last-child {
-					height: calc(100% / 3 - 10px);
-				}
-			}
-		}
-		.box {
-			background-image: url('../../assets/weather/box_bg.png');
-			background-size: 100% 100%;
-			background-repeat: no-repeat;
-			margin:10px 0px;
-			&.air,
-			&.tem,
-			&.humidity {
-				position: relative;
-			}
+	}
+	.mt {
+		margin-top: 10px;
+	}
+
+	.left {
+		.panel {
+			height: calc(33% - 10px / 3);
 		}
 	}
-	.echarts,
-	.echarts > div:first-child,
-	.echarts > div > canvas {
-		width: 100% !important;
-		height: 100% !important;
+
+	.right {
+		.panel {
+			height: calc(50% - 5px);
+		}
+	}
+
+	.panel-body {
+		height: calc(100% - 53px);
 	}
 }
 </style>

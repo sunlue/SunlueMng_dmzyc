@@ -79,7 +79,7 @@ export default {
 		this.receiveNumber()
 		setTimeout(function() {
 			that.$refs.event.eventCome()
-		}, 3000);
+		}, 30000);
 	},
 	methods:{
 		receiveNumber(){

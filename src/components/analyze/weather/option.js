@@ -1,25 +1,14 @@
 const option = {
 	air: function(params) {
-		let today = params.today;
 		return {
-			title: {
-				show: true,
-				text: '环境质量（PM2.5）',
-				textStyle: {
-					color: '#d9efff',
-					fontSize: 18
-				},
-				left: '35%',
-				top: 10
-			},
 			series: [{
 				name: 'PM2.5',
 				type: 'gauge',
 				min: 0,
 				max: 400,
 				splitNumber: 8,
-				radius: '80%',
-				center: ['50%', '60%'],
+				radius: '96%',
+				center: ['50%', '58%'],
 				axisLine: { // 坐标轴线
 					lineStyle: { // 属性lineStyle控制线条样式
 						color: [
@@ -88,35 +77,24 @@ const option = {
 					}
 				},
 				data: [{
-					value: today.air_pm25,
-					name: today.air_level
+					value: params.value,
+					name: params.name
 				}]
 			}]
 		}
 	},
 	tem: function(params) {
-		let today = params.today;
 		return {
-			title: {
-				show: true,
-				text: '当前温度（℃）',
-				textStyle: {
-					color: '#d9efff',
-					fontSize: 18
-				},
-				left: '35%',
-				top: 10
-			},
 			series: [{
 				name: '温度',
 				type: 'gauge',
-				center: ['50%', '60%'], // 默认全局居中
-				radius: '80%',
+				center: ['50%', '58%'],
+				radius: '96%',
 				min: -20,
 				max: 50,
 				splitNumber: 7,
-				axisLine: { // 坐标轴线
-					lineStyle: { // 属性lineStyle控制线条样式
+				axisLine: { 
+					lineStyle: {
 						color: [
 							[0.1428, 'rgb(153,0,76)'],
 							[0.2857, 'rgb(255,0,0)'],
@@ -187,30 +165,19 @@ const option = {
 					}
 				},
 				data: [{
-					value: today.tem,
+					value: params.value,
 					name: '温度'
 				}]
 			}]
 		}
 	},
 	humidity: function(params) {
-		let today = params.today;
 		return {
-			title: {
-				show: true,
-				text: '当前湿度（%）',
-				textStyle: {
-					color: '#d9efff',
-					fontSize: 18
-				},
-				left: '35%',
-				top: 10
-			},
 			series: [{
 				name: '湿度',
 				type: 'gauge',
-				center: ['50%', '60%'], // 默认全局居中
-				radius: '80%',
+				center: ['50%', '58%'], // 默认全局居中
+				radius: '96%',
 				min: 0,
 				max: 100,
 				splitNumber: 10,
@@ -283,20 +250,19 @@ const option = {
 					}
 				},
 				data: [{
-					value: parseInt(today.humidity),
+					value: parseInt(params.value),
 					name: '湿度'
 				}]
 			}]
 		}
 	},
-	weather: function(params) {
-		let future = params.future.data;
+	weather: function(future) {
+		
 		let futureData = new Object();
 
 		let futureTem1 = new Array(); //高温
 		let futureTem2 = new Array(); //低温
 		let futureDay = new Array(); //低温
-
 
 		for (let i = 0; i < future.length; i++) {
 			let date=new Date(future[i]['date']);
@@ -305,21 +271,11 @@ const option = {
 			futureDay.push(future[i].day)
 		}
 		return {
-			title: {
-				show: true,
-				text: '未来7天天气预报',
-				textStyle: {
-					color: '#d9efff',
-					fontSize: 18
-				},
-				left: 50,
-				top: 20
-			},
 			legend: {
 				data: ['高温', '低温'],
 				align: 'left',
 				right: 30,
-				top: 20,
+				top: 0,
 				textStyle: {
 					color: ["rgb(249,56,127)", "rgb(66,228,251)"]
 				}
@@ -344,9 +300,10 @@ const option = {
 				},
 			},
 			grid: {
-				top: 100,
-				left: 80,
-				right: 80
+				top: 60,
+				left: 26,
+				right: 20,
+				bottom:20
 			},
 			series: [{
 				data: futureTem1,
@@ -414,8 +371,7 @@ const option = {
 			}]
 		}
 	},
-	hours: function(params) {
-		let future = params.future.data[0]['hours'];
+	hours: function(future) {
 		let futureData = new Object();
 		let futureTime = new Array(); //时间
 		let futureTem = new Array(); //温度
@@ -442,8 +398,9 @@ const option = {
 				}
 			},
 			grid: {
-				left: 80,
-				right: 80
+				left: 26,
+				right: 20,
+				bottom: 20
 			},
 			series: [{
 				data: futureTem,

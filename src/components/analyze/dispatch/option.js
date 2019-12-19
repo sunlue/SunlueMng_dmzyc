@@ -37,7 +37,7 @@ const option = {
 				}
 			}],
 			series: [{
-				name: '邮件营销',
+				name: '时间',
 				type: 'line',
 				stack: '总量',
 				areaStyle: {
@@ -59,7 +59,7 @@ const option = {
 					shadowColor: 'rgba(0, 0, 0, 0.5)',
 					shadowBlur: 10
 				},
-				data: [120, 132, 101, 134, 90, 230, 210, 134, 90, 230, 210, 122],
+				data: data,
 				itemStyle: {
 					borderColor: 'rgb(6,111,242)'
 				}
@@ -77,7 +77,6 @@ const option = {
 			grid:{
 				bottom:'0%'
 			},
-			
 			legend: {
 				orient: 'horizontal',
 				data: ['社会安全事件', '事故灾难', '公共卫生事件', '自然灾害'],
@@ -138,7 +137,6 @@ const option = {
 							// shadowColor: '#999',
 							padding: [0, 2, 0, 10],
 							rich: {
-
 								b: {
 									fontSize: 12,
 									lineHeight: 22,

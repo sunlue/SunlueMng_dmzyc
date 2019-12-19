@@ -45,16 +45,16 @@ export default {
 	methods: {
 		// listen event
 		onPlayerPlay(player) {
-			// console.log('player play!', player)
+			console.log('player play!', player)
 		},
 		onPlayerPause(player) {
-			// console.log('player pause!', player)
+			console.log('player pause!', player)
 		},
 		// ...player event
 
 		// or listen state event
 		playerStateChanged(playerCurrentState) {
-			// console.log('player current update state', playerCurrentState)
+			console.log('player current update state', playerCurrentState)
 		},
 
 		// player is ready
