@@ -7,7 +7,7 @@ const option = {
 				min: 0,
 				max: 400,
 				splitNumber: 8,
-				radius: '96%',
+				radius: '100%',
 				center: ['50%', '58%'],
 				axisLine: { // 坐标轴线
 					lineStyle: { // 属性lineStyle控制线条样式
@@ -257,15 +257,11 @@ const option = {
 		}
 	},
 	weather: function(future) {
-		
-		let futureData = new Object();
-
 		let futureTem1 = new Array(); //高温
 		let futureTem2 = new Array(); //低温
 		let futureDay = new Array(); //低温
 
 		for (let i = 0; i < future.length; i++) {
-			let date=new Date(future[i]['date']);
 			futureTem1.push(future[i]['tem1'])
 			futureTem2.push(future[i]['tem2'])
 			futureDay.push(future[i].day)
@@ -372,7 +368,6 @@ const option = {
 		}
 	},
 	hours: function(future) {
-		let futureData = new Object();
 		let futureTime = new Array(); //时间
 		let futureTem = new Array(); //温度
 		for (let i = 0; i < future.length; i++) {

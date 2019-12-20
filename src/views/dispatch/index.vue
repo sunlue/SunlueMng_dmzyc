@@ -28,7 +28,19 @@
 						</panel>
 					</Col>
 					<Col span="8" class="h100">
-						<panel title="应急知识库" title_en="Emergency knowledge base" class="knowledge list">
+						<panel title="应急知识库分类" title_en="Emergency knowledge base" class="knowledge type">
+							<Row :gutter="10">
+								<template v-for="(item,index) in ['火灾','台风','水灾','地震','踩踏','疫情']">
+									<Col span="8" :key="index">
+										<div class="box" :key="index">
+											<p>{{item}}</p>
+											<strong>{{Math.ceil(Math.random() * 100)}}</strong>
+										</div>
+									</Col>
+								</template>
+							</Row>
+						</panel>
+						<panel title="应急知识库" title_en="Emergency knowledge base" class="knowledge list mt">
 							<div class="scroll">
 								<List item-layout="vertical">
 									<ListItem v-for="i in 10" :key="i">
@@ -55,18 +67,6 @@
 									</ListItem>
 								</List>
 							</div>
-						</panel>
-						<panel title="应急知识库" title_en="Emergency knowledge base" class="knowledge type mt">
-							<Row :gutter="10">
-								<template v-for="i in 4">
-									<Col span="12" :key="i">
-										<div class="box" :key="i">
-											<p>火灾</p>
-											<strong>40</strong>
-										</div>
-									</Col>
-								</template>
-							</Row>
 						</panel>
 					</Col>
 				</Row>
@@ -158,7 +158,7 @@
 			&.type{
 				.ivu-col{
 					margin-top: 10px;
-					&:first-child,&:nth-child(2){
+					&:first-child,&:nth-child(2),&:nth-child(3){
 						margin-top: 0px;
 					}
 					.box{

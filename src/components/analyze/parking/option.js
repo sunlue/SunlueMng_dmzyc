@@ -150,7 +150,7 @@ const option = {
 					data: data[year],
 					barWidth:'80%',
 					barMaxWidth:60,
-					barMaxWidth:40,
+					barMinWidth:40,
 					label: {
 						normal: {
 							show: true,

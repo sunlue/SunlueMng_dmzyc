@@ -1,68 +1,66 @@
 <template>
-	<video-player
-		class="video-player-box"
-		ref="videoPlayer"
-		:options="playerOptions"
-		:playsinline="true"
-		customEventName="customstatechangedeventname"
-		@ready="playerReadied"
-	></video-player>
+	<div class="monitor">
+		<!-- <template v-for="i in 16">
+			<div class="col" :key="i">
+				<panel title="竹里" :key="i">
+					<div class="box empty">
+					</div>
+				</panel>
+			</div>
+		</template> -->
+		<Row>
+			<Col span="6">
+				<panel title=""></panel>
+			</Col>
+		</Row>
+	</div>
 </template>
 
 <script>
-import 'video.js/dist/video-js.css';
-import 'videojs-flash'
-import { videoPlayer } from 'vue-video-player';
+import panel from '@/components/panel'
 export default {
 	components: {
-		videoPlayer
+		panel
 	},
 	data() {
-		return {
-			playerOptions: {
-				muted: true,
-				language: 'zh-CN',
-				playbackRates: [0.7, 1.0, 1.5, 2.0],
-				aspectRatio:'16:9',
-				sources: [
-					{
-						type: 'rtmp/mp4',
-						src: 'rtmp://rtmp01open.ys7.com/openlive/f01018a141094b7fa138b9d0b856507b.hd'
-					}
-				],
-				poster: '/static/images/author.jpg'
-			}
-		};
+		return{
+			items:[{
+				name:'游客中心',
+				hls:'',
+				rtmp:''
+			}]
+		}
 	},
 	mounted() {
-		console.log('this is current player instance object', this.player);
-	},
-	computed: {
-		player() {
-			return this.$refs.videoPlayer.player;
-		}
-	},
-	methods: {
-		// listen event
-		onPlayerPlay(player) {
-			console.log('player play!', player)
-		},
-		onPlayerPause(player) {
-			console.log('player pause!', player)
-		},
-		// ...player event
-
-		// or listen state event
-		playerStateChanged(playerCurrentState) {
-			console.log('player current update state', playerCurrentState)
-		},
-
-		// player is ready
-		playerReadied(player) {
-			console.log('the player is readied', player);
-			// you can use it to do something...
-			// player.[methods]
-		}
+		let img=document.getElementsByTagName('img');
+		console.log(img)
 	}
 };
 </script>
+<style lang="less">
+	.monitor{
+		padding: 5px;
+		.col{
+			margin: 5px;
+			width: calc(25% - 10px);
+			height: calc(25% - 10px);
+			float: left;
+			.panel{
+				height: 100%;
+				.panel-body{
+					height: calc(100% - 28px);
+					overflow: hidden;
+					.box{
+						width: 100%;
+						height: 100%;
+						&.empty{
+							background-image:url('../../assets/monitor/spjk.png');
+							background-size: 100% 100%;
+							background-position: center;
+						}
+					}
+				}
+			}
+		}
+	}
+</style>

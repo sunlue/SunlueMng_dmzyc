@@ -37,9 +37,8 @@ const option = {
 				}
 			}],
 			series: [{
-				name: '时间',
+				name: '事件',
 				type: 'line',
-				stack: '总量',
 				areaStyle: {
 					color: {
 						type: 'linear',

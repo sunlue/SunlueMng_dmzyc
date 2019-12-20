@@ -76,9 +76,9 @@ export default {
 	},
 	mounted() {
 		let that=this;
-		this.receiveNumber()
+		that.receiveNumber()
 		setTimeout(function() {
-			that.$refs.event.eventCome()
+			// that.$refs.event.eventCome()
 		}, 30000);
 	},
 	methods:{
