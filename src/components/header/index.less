@@ -3,16 +3,36 @@
 	flex-direction: row;
 	background: #070a55;
 	color: white;
+	height: 60px;
+	flex: 0 0 60px;
+	line-height: 60px;
 	.box{
 		width: 60%;
 		&:first-child,&:last-child{
 			width: 20%;
 		}
 		&:first-child{
-			padding: 10px;
 			box-sizing: border-box;
+			position: relative;
 			img{
-				max-height: 100%;
+				height: calc(100% - 20px);
+				margin-top: 10px;
+				margin-left: 20px;
+				position: absolute;
+				z-index: 99;
+			}
+			&>div{
+				padding-left: 80px;
+			}
+			&:after{
+				content: '';
+				display: block;
+				width: 80px;
+				height: 60px;
+				background: #082671;
+				position: absolute;
+				top: 0px;
+				left: 0px;
 			}
 		}
 		&:last-child{

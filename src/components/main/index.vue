@@ -1,8 +1,8 @@
 <template>
 	<div class="container-body">
-		<menu-bar></menu-bar>
+		<head-bar></head-bar>
 		<div class="container">
-			<head-bar></head-bar>
+			<menu-bar></menu-bar>
 			<router-view class="body" />
 		</div>
 	</div>
@@ -23,22 +23,15 @@ import headBar from '@/components/header'
 <style lang="less">
 	@import url('//at.alicdn.com/t/font_1559601_d3ju138fgrl.css');
 	.container-body{
+		display: flex;
+		flex-direction: column;
 		width: 100%;
 		height: 100%;
-		display: flex;
-		flex-direction: row;
-		.menu-bar {
-			flex: 0 0 80px;
-		}
-		.container {
+		.container{
 			flex: auto;
 			display: flex;
-			flex-direction: column;
-			& > .header {
-				height: 60px;
-				flex: 0 0 60px;
-				line-height: 60px;
-			}
+			flex-direction: row;
+			height: 100%;
 			& > .body {
 				flex: auto;
 				background: #070a55;

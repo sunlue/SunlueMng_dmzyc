@@ -3,28 +3,30 @@
 		<Row :gutter="10" class="h100">
 			<Col span="10" class="left h100">
 				<Row :gutter="10" class="h100">
-					<Col span="10" style="height: calc(100% - 463px);">
-						<panel title="当前温度" title_en="Current temperature (℃)">
-							<span slot="extra">更新时间:{{v6.update_time}}</span>
-							<v-chart :options="weather.tem" :autoresize="true" />
-						</panel>
-						<panel title="当前湿度" title_en="Current humidity (%)" class="mt">
-							<span slot="extra">更新时间:{{v6.update_time}}</span>
-							<v-chart :options="weather.humidity" :autoresize="true" />
-						</panel>
-					</Col>
-					<Col span="14">
-						<panel title="空气质量" title_en="Air quality">
-							<span slot="extra">更新时间:{{v6.update_time}}</span>
-							<s-environment :data="v6"></s-environment>
-							<p class="mt">{{v6.air_tips}}</p>
-						</panel>
-						<panel title="预警信息" title_en="The early warning information" class="alarm mt">
-							<span slot="extra">更新时间:{{v6.update_time}}</span>
-							<p>预警类型：<span v-if="v6.alarm_type">{{v6.alarm_type}}</span><template v-else>无</template></p>
-							<p>预警级别：<span v-if="v6.alarm_level">{{v6.alarm_level}}</span><template v-else>无</template></p>
-							<p>预警内容：<span v-if="v6.alarm_content">{{v6.alarm_content}}</span><template v-else>无</template></p>
-						</panel>
+					<Col span="24" style="height: calc(100% - 463px);">
+						<Col span="10" class="h100" style="padding-right: 5px;">
+							<panel title="当前温度" title_en="Current temperature (℃)" style="height: calc(50% - 5px);">
+								<span slot="extra">更新时间:{{v6.update_time}}</span>
+								<v-chart :options="weather.tem" :autoresize="true" />
+							</panel>
+							<panel title="当前湿度" title_en="Current humidity (%)" class="mt" style="height: calc(50% - 5px);">
+								<span slot="extra">更新时间:{{v6.update_time}}</span>
+								<v-chart :options="weather.humidity" :autoresize="true" />
+							</panel>
+						</Col>
+						<Col span="14" class="h100" style="padding-left: 5px;">
+							<panel title="空气质量" title_en="Air quality" :class="[!screenfull?'h100':'']">
+								<span slot="extra">更新时间:{{v6.update_time}}</span>
+								<s-environment :data="v6"></s-environment>
+								<p class="air_tips mt">{{v6.air_tips}}</p>
+							</panel>
+							<panel title="预警信息" title_en="The early warning information" class="alarm mt" v-if="screenfull">
+								<span slot="extra">更新时间:{{v6.update_time}}</span>
+								<p>预警类型：<span v-if="v6.alarm_type">{{v6.alarm_type}}</span><template v-else>无</template></p>
+								<p>预警级别：<span v-if="v6.alarm_level">{{v6.alarm_level}}</span><template v-else>无</template></p>
+								<p>预警内容：<span v-if="v6.alarm_content">{{v6.alarm_content}}</span><template v-else>无</template></p>
+							</panel>
+						</Col>
 					</Col>
 					<Col span="24" class="mt">
 						<panel title="24小时天气" title_en="24-hour weather">
@@ -72,7 +74,7 @@ export default {
 			params : {
 				appid: '74669544',
 				appsecret: 'L4uImetj',
-				cityid: '101272106',
+				cityid: '101270114',
 				lng: '105.826194',
 				lat: '32.432276',
 				vue: 1
@@ -86,17 +88,25 @@ export default {
 			},
 			v6:{},
 			v9:{},
-			hours:[]
+			hours:[],
+			screenfull:false
 		};
 	},
 	created() {
 		// let that = this;
 		// this.getWeather();
-		setInterval(function() {
+		// setInterval(function() {
 			// that.getWeather();
-		}, 1000 * 60 * 30);
+		// }, 1000 * 60 * 30);
 	},
 	mounted() {
+		let that=this;
+		window.onresize = () => {
+			return (() => {
+				let screenfull=(document.body.scrollHeight == window.screen.height && document.body.scrollWidth == window.screen.width);
+				that.screenfull = screenfull
+			})()
+		}
 		let v6=this.$store.getters.weather_v6;
 		let v9=this.$store.getters.weather_v9;
 		if (v6.city!=undefined) {
@@ -170,12 +180,12 @@ export default {
 		margin-top: 10px;
 	}
 
-	.left {
-		.panel {
-			height: calc(50% - 5px);
-		}
+	.air_tips{
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
 	}
-
+	
 	.right {
 		.panel {
 			height: calc(50% - 5px);
@@ -183,9 +193,10 @@ export default {
 	}
 	
 	.alarm{
-		p{
-			span{
-				color: red;
+		.panel-body{
+			p{
+				height: 25px;
+				line-height: 25px;
 			}
 		}
 	}

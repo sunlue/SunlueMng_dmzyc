@@ -53,24 +53,19 @@ export default {
 		this.dealWithNum(this.number);
 	},
 	methods: {
-		// 处理数字
 		dealWithNum(num) {
 			num = num.toString();
-			// 把订单数变成字符串
 			if (num.length < 6) {
-				num = '0' + num; // 如未满八位数，添加"0"补位
-				this.dealWithNum(num); // 递归添加"0"补位
+				num = '0' + num;
+				this.dealWithNum(num);
 			} else if (num.length === 6) {
-				// 订单数中加入逗号
 				num = num.slice(0, 3) + ',' + num.slice(3, 6);
-				this.numberArray = num.split(''); // 将其便变成数据，渲染至滚动数组
+				this.numberArray = num.split(''); 
 			} else {
-				// 数字超过八位显示异常
 				this.$Message.warning('总量数字过大');
 			}
 			this.setNumberTransform();
 		},
-		// 设置文字滚动
 		setNumberTransform() {
 			this.$nextTick(function(){
 				for(let i =0;i<this.numberArray.length;i++){

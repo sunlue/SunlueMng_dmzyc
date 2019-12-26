@@ -1,7 +1,7 @@
 <template>
 	<div class="header">
 		<div class="box">
-			<!-- <img src="../../assets/logo.png" /> -->
+			<img src="../../assets/logo2.png" />
 			<div class="time">
 				<span>{{ year }}年{{ month }}月{{ day }}日</span>
 				<span>星期{{ weekText[week] }}</span>
@@ -62,7 +62,6 @@
 				}, 1000);
 			},
 			renderV6(result){
-				console.log(result)
 				this.weather=result
 			},
 			getWeatherV6(callback) {

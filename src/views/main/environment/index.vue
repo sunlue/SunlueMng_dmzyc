@@ -3,29 +3,48 @@
 		<Col span="8">
 			<div class="left">
 				<div class="aqi">
-					<strong class="number">25</strong>
+					<strong class="number">{{v6.air}}</strong>
 					<span class="label">
 						<i class="iconfont icon-kongqizhiliang"></i>
-						AQI 优</span>
+						AQI {{v6.air_level}}</span>
 				</div>
 				<ul class="">
-					<li><i class="iconfont icon-fengsu"></i>西南风二级</li>
-					<li><i class="iconfont icon-sd"></i>湿度25%</li>
-					<li><i class="iconfont icon-qiya"></i>气压1025hpa</li>
+					<li><i class="iconfont icon-fengsu"></i>{{v6.win}}{{v6.win_speed}}</li>
+					<li><i class="iconfont icon-sd"></i>湿度{{v6.humidity}}</li>
+					<li><i class="iconfont icon-qiya"></i>气压{{v6.pressure}}hpa</li>
 				</ul>
 			</div>
 		</Col>
 		<Col span="16">
 			<ul class="right">
-				<template v-for="(item,index) in environment">
-					<li :key="index" :style="'border-bottom: 3px solid '+item.color+';'">
-						<div class="label">
-							<p>{{item.name}}</p>
-							<p>{{item.name_zh}}</p>
-						</div>
-						<div class="number">{{item.number}}</div>
-					</li>
-				</template>
+				<li>
+					<div class="label">
+						<p>PM2.5</p>
+						<p>细颗粒</p>
+					</div>
+					<div class="number">{{v6.air_pm25}}</div>
+				</li>
+				<li>
+					<div class="label">
+						<p>PM10</p>
+						<p>可吸入颗粒</p>
+					</div>
+					<div class="number">0</div>
+				</li>
+				<li>
+					<div class="label">
+						<p>NO2</p>
+						<p>二氧化氮</p>
+					</div>
+					<div class="number">0</div>
+				</li>
+				<li>
+					<div class="label">
+						<p>SO2</p>
+						<p>二氧化硫</p>
+					</div>
+					<div class="number">0</div>
+				</li>
 			</ul>
 		</Col>
 	</Row>
@@ -35,29 +54,38 @@
 	export default{
 		data() {
 			return {
-				environment:[{
-					name:'PM2.5',
-					name_zh:'细颗粒',
-					number:'10',
-					color:'rgb(255,189,0)'
-				},{
-					name:'PM10',
-					name_zh:'可吸入颗粒',
-					number:'20',
-					color:'rgb(255,239,47)'
-				},{
-					name:'NO2',
-					name_zh:'二氧化氮',
-					number:'14',
-					color:'rgb(43,238,155)'
-				},{
-					name:'SO2',
-					name_zh:'二氧化硫',
-					number:'5',
-					color:'rgb(121,1,204)'
-				}],
+				params : {
+					appid: '74669544',
+					appsecret: 'L4uImetj',
+					cityid: '101270114',
+					lng: '105.826194',
+					lat: '32.432276',
+					vue: 1
+				},
+				v6:{},
 			};
 		},
+		mounted() {
+			let v6=this.$store.getters.weather_v6;
+			if (v6.city!=undefined) {
+				this.renderV6(v6)
+			} else{
+				this.getWeatherV6((result)=>{
+					this.renderV6(result)
+				})
+			}
+		},
+		methods:{
+			renderV6(result){
+				console.log(result)
+				this.v6=result
+			},
+			getWeatherV6(callback) {
+				this.$store.dispatch('weather_v6', this.params).then(result => {
+					callback(result)
+				});
+			},
+		}
 	}
 </script>
 
@@ -93,8 +121,18 @@
 				display: flex;
 				justify-content: space-between;
 				margin-bottom: 12px;
+				&:first-child{
+					border-bottom: 3px solid rgb(255,189,0);
+				}
+				&:nth-child(2){
+					border-bottom: 3px solid rgb(255,239,47);
+				}
+				&:nth-child(3){
+					border-bottom: 3px solid rgb(43,238,155);
+				}
 				&:last-child{
 					margin-bottom: 0px;
+					border-bottom: 3px solid rgb(121,1,204);
 				}
 				.label{
 					font-size: 14px;

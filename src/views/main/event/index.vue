@@ -283,16 +283,7 @@ export default {
 		}
 	}
 }
-.alarm {
-	width: 500px;
-	height: 500px;
-	background-image: url('../../../assets/main/event/alarm3.png');
-	-webkit-animation: alarmFlash 2s infinite linear;
-	animation: alarmFlash 1000ms infinite linear;
-	audio{
-		display: none;
-	}
-}
+
 .alarm-modal{
 	display: flex;
 	align-items: center;
@@ -305,6 +296,18 @@ export default {
 		background: transparent;
 		box-shadow: none;
 	}
+	
+	.alarm {
+		width: 500px;
+		height: 500px;
+		background-image: url('../../../assets/main/event/alarm3.png');
+		-webkit-animation: alarmFlash 2s infinite linear;
+		animation: alarmFlash 1000ms infinite linear;
+		audio{
+			display: none;
+		}
+	}
+	
 }
 @-webkit-keyframes alarmFlash {
 	0% {

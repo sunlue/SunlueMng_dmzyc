@@ -20,7 +20,7 @@
 	.traffic.box{
 		padding-top: 10px;
 		img{
-			max-width: 82%;
+			max-width: 89%;
 			margin: 0 auto;
 			display: block;
 		}

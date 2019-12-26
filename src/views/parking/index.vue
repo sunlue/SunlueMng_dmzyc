@@ -25,7 +25,7 @@
 					</Row>
 				</panel>
 				<panel class="mt" title="停车场使用情况" title_en="Car park usage">
-					<s-parking class="mt"></s-parking>
+					<s-parking></s-parking>
 				</panel>
 				<panel class="district mt" title="地区实时车辆数" title_en="District real-time vehicle count">
 					<div slot="extra" v-if="false">
@@ -145,7 +145,7 @@ export default {
 			.box{
 				background: rgba(250, 250, 250, 0.2);
 				border-radius: 5px;
-				padding: 19.5px 0px;
+				padding: 22px 0px;
 				text-align: center;
 				p{
 					color: white;

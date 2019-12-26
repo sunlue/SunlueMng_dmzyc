@@ -16,28 +16,28 @@
 				<div class="box-left">
 					<router-link :to="{name:'parking'}" class="box">
 						<span>停车场管理系统</span>
-						<img src="../assets/list1_icon.png" class="icon" />
+						<i class="iconfont icon-tingchechang"></i>
 					</router-link>
 				</div>
 				<div class="box-right">
 					<div class="box-top">
 						<router-link :to="{name:'main'}" class="box-left  box">
-							<span>综合管理系统</span>
-							<img src="../assets/list2_icon.png" class="icon" />
+							<span>综合管理</span>
+							<i class="iconfont icon-zonghezhanshi"></i>
 						</router-link>
-						<router-link :to="{name:'monitor'}" class="box-right  box">
-							<span>视频监控系统</span>
-							<img src="../assets/list3_icon.png" class="icon" />
+						<router-link :to="{name:'dispatch'}" class="box-right  box">
+							<span>应急指挥调度</span>
+							<i class="iconfont icon-zhihuitiaodu"></i>
 						</router-link>
 					</div>
 					<div class="box-bottom">
 						<router-link :to="{name:'weather'}" class="box-left  box">
 							<span>环境检测<br />及天气质量</span>
-							<img src="../assets/list4_icon.png" class="icon" />
+							<i class="iconfont icon-huanjingtianqi"></i>
 						</router-link>
-						<router-link :to="{name:'dispatch'}" class="box-right  box">
-							<span>应急指挥调度</span>
-							<img src="../assets/list5_icon.png" class="icon" />
+						<router-link :to="{name:'monitor'}" class="box-right  box">
+							<span>视频监控</span>
+							<i class="iconfont icon-jiankong"></i>
 						</router-link>
 					</div>
 				</div>
@@ -132,10 +132,9 @@
 					display: block;
 					position: relative;
 				}
-				.icon{
+				.iconfont{
 					position: absolute;
-					right: 0px;
-					bottom: 0px;
+					color: rgba(255,255,255,.5);
 				}
 				span{
 					font-size: 36px;
@@ -144,7 +143,8 @@
 					position: absolute;
 					display: block;
 				}
-				.box-left{
+				
+				&>.box-left{
 					width: calc(28.57% - 16px);
 					background-image: url('../assets/list1.png');
 					background-size: 100% 100%;
@@ -160,9 +160,14 @@
 						top: 40px;
 						text-align: center;
 					}
+					.iconfont{
+						right: 0px;
+						bottom: 0px;
+						font-size: 160px;
+					}
 				}
 				
-				.box-right{
+				&>.box-right{
 					width: calc(100% - 28.57% - 16px);
 					margin-left: 16px;
 					.box{
@@ -170,10 +175,11 @@
 						background-size: 100% 100%;
 						background-repeat: no-repeat;
 					}
-					.icon{
+					.iconfont{
 						top: 50%;
 						right: 40px;
 						transform: translateY(-50%);
+						font-size: 120px;
 					}
 					.box-top{
 						&>.box{
@@ -184,10 +190,11 @@
 							background-image: url('../assets/list2.png');
 							margin:0px 16px 16px 0px;
 							span{
-								width: 80px;
+								top: 50%;
 								left: 40px;
-								top: 40px;
+								width: 80px;
 								text-align: center;
+								transform: translateY(-50%);
 							}
 						}
 						.box-right{
@@ -195,9 +202,10 @@
 							background-image: url('../assets/list3.png');
 							margin:0px 0px 16px 16px;
 							span{
-								width: 160px;
+								top: 50%;
 								left: 100px;
-								top: 60px;
+								width: 160px;
+								transform: translateY(-50%);
 							}
 						}
 					}
@@ -210,9 +218,10 @@
 							margin:16px 16px 0px 0px;
 							background-image: url('../assets/list4.png');
 							span{
-								width: 200px;
+								top: 50%;
 								left: 100px;
-								top: 60px;
+								width: 200px;
+								transform: translateY(-50%);
 								text-align: right;
 							}
 						}
@@ -223,7 +232,8 @@
 							span{
 								width: 80px;
 								left: 40px;
-								top: 40px;
+								top: 50%;
+								transform: translateY(-50%);
 								text-align: center;
 							}
 						}

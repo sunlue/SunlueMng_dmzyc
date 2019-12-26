@@ -31,10 +31,7 @@ export default {
 			// echarts配置
 			this.chart = echarts.init(this.$refs.map);
 			this.chart.setOption(option);
-			this.bmap = this.chart
-				.getModel()
-				.getComponent('bmap')
-				.getBMap();
+			this.bmap = this.chart.getModel().getComponent('bmap').getBMap();
 			this.bmap.setMinZoom(3); // 设置地图最小缩放比例
 			this.bmap.setMaxZoom(6); // 设置地图最大缩放比例
 			const _this = this;
@@ -51,6 +48,9 @@ export default {
 		width: 100%;
 		height: 100%;
 		position: relative;
+		.BMap_cpyCtrl,.anchorBL{
+			display: none;
+		}
 		.map-box{
 			width: 100%;
 			height: 100%;

@@ -1,78 +1,19 @@
-<template>
-	<video-player
-		class="video-player-box"
-		ref="videoPlayer"
-		:options="playerOptions"
-		:playsinline="true"
-		customEventName="customstatechangedeventname"
-		@ready="playerReadied"
-	></video-player>
-</template>
 
-<script>
-import 'videojs-flash';
-import videojs from 'video.js';
-import 'video.js/dist/video-js.css';
-import SWF_URL from 'videojs-swf/dist/video-js.swf';
-videojs.options.flash.swf = SWF_URL;
-import { videoPlayer } from 'vue-video-player';
-import 'vue-video-player/src/custom-theme.css';
-
-export default {
-	components: {
-		videoPlayer
-	},
-	data() {
-		return {
-			playerOptions: {
-				muted: true,
-				language: 'zh-CN',
-				playbackRates: [0.7, 1.0, 1.5, 2.0],
-				aspectRatio: '16:9',
-				sources: [
-					// {
-					// 	type: 'application/x-mpegURL',
-					// 	src: 'http://hls01open.ys7.com/openlive/f01018a141094b7fa138b9d0b856507b.hd.m3u8'
-					// },
-					{
-						type: 'rtmp/mp4',
-						src: 'rtmp://rtmp01open.ys7.com/openlive/fd344835538d465b9496750b4f417d67.hd'
-					}
-				],
-				techOrder: ['flash'],
-				poster: '/static/images/author.jpg'
-			}
-		};
-	},
-	mounted() {
-		console.log('this is current player instance object', this.player);
-	},
-	computed: {
-		player() {
-			return this.$refs.videoPlayer.player;
-		}
-	},
-	methods: {
-		// listen event
-		onPlayerPlay(player) {
-			console.log('player play!', player);
-		},
-		onPlayerPause(player) {
-			console.log('player pause!', player);
-		},
-		// ...player event
-
-		// or listen state event
-		playerStateChanged(playerCurrentState) {
-			console.log('player current update state', playerCurrentState);
-		},
-
-		// player is ready
-		playerReadied(player) {
-			console.log('the player is readied', player);
-			// you can use it to do something...
-			// player.[methods]
-		}
-	}
-};
-</script>
+<iframe
+  src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D75659417/1.live&autoplay=0&accessToken=at.7expi8sg65nqwt370szgzs5mcfs8h3zt-9rhghxkihd-0mx02jh-p4cylmicn"
+  width="600"
+  height="400"
+  id="ysopen"
+  allowfullscreen
+>
+</iframe>
+/* 获取播放器元素 */
+var player = document.getElementById('ysOpenDevice').contentWindow;
+/* iframe 支持方法 */
+player.postMessage("play", "https://open.ys7.com/ezopen/h5/iframe") /* 播放 */
+player.postMessage("stop", "https://open.ys7.com/ezopen/h5/iframe") /* 结束 */
+player.postMessage("capturePicture", "https://open.ys7.com/ezopen/h5/iframe") /* 截图 */
+player.postMessage("openSound", "https://open.ys7.com/ezopen/h5/iframe") /* 开启声音 */
+player.postMessage("closeSound", "https://open.ys7.com/ezopen/h5/iframe") /* 关闭声音 */
+player.postMessage("startSave", "https://open.ys7.com/ezopen/h5/iframe") /* 开始录制 */
+player.postMessage("stopSave", "https://open.ys7.com/ezopen/h5/iframe") /* 结束录制 */

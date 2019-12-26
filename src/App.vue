@@ -12,5 +12,5 @@ import '@/styles/common.less';
 
 
 <style>
-	@import url('//at.alicdn.com/t/font_1559601_d3ju138fgrl.css');
+	@import url('//at.alicdn.com/t/font_1559601_v0iehn0ya5m.css');
 </style>

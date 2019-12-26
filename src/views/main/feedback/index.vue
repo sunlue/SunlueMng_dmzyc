@@ -44,10 +44,14 @@
 
 <style lang="less">
 	.feedback{
+		height: 100%;
 		li{
-			padding: 4px 0px;
 			display: flex;
 			justify-content: center;
+			height: calc(100% / 6);
+			align-items: center;
+			line-height: 24px;
+			align-content: center;
 			span{
 				width: 48px;
 				display: inline-block;

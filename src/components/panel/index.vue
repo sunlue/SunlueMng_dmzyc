@@ -76,11 +76,12 @@ export default {
 			.zh {
 				font-size: 16px;
 				font-weight: bold;
-				padding-bottom: 4px;
 			}
 			.en {
 				font-size: 14px;
-				padding-bottom: 4px;
+				color: rgba(255,255,255,.5);
+				height: 20px;
+				line-height: 20px;
 			}
 		}
 		.extra {
@@ -89,6 +90,7 @@ export default {
 		}
 	}
 	.panel-body {
+		padding-top: 10px;
 		box-sizing: border-box;
 		position: relative;
 	}

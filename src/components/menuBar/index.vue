@@ -1,8 +1,5 @@
 <template>
 	<div class="menu-bar">
-		<div class="logo">
-			<img src="../../assets/logo2.png" />
-		</div>
 		<ul class="nav">
 			<template v-for="(item, index) in nav">
 				<li :class="item.href == active ? 'active' : ''" :key="index" @click="click(item,index)">
@@ -44,7 +41,7 @@ export default {
 				},
 				{
 					name: '环境天气',
-					icon: 'icon-tingchechang',
+					icon: 'icon-huanjingtianqi',
 					href: 'weather'
 				}
 			]

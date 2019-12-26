@@ -47,23 +47,6 @@
 										<ListItemMeta >
 											<template slot="title">这是列表的文本内容，这是列表的文本内容，这是列表的文本内容，这是列表的文本内容，这是列表的文本内容，这是列表的文本内容。</template>
 										</ListItemMeta>
-										<template slot="action">
-											<li>
-												<Icon type="ios-star-outline" /> 123
-											</li>
-											<li>
-												<Icon type="ios-thumbs-up-outline" /> 234
-											</li>
-											<li>
-												<Icon type="ios-chatbubbles-outline" /> 345
-											</li>
-											<li>
-												<a href="">查看</a>
-											</li>
-											<li>
-												<a href="">删除</a>
-											</li>
-										</template>
 									</ListItem>
 								</List>
 							</div>
@@ -132,7 +115,7 @@
 			height: 100%;
 		}
 		.proportion{
-			height: calc(100% - 600px);
+			height: calc(100% - 587px);
 			.panel{
 				height: 100%;
 				.panel-body{
@@ -174,12 +157,47 @@
 							color: rgb(7,219,225);
 							font-size: 26px;
 						}
+						&{
+							background-position: center center;
+							background-repeat: no-repeat;
+						}
+					}
+					
+					&:nth-child(1){
+						.box{
+							background-image: url('../../assets/dispatch/zs1.png');
+						}
+					}
+					&:nth-child(2){
+						.box{
+							background-image: url('../../assets/dispatch/zs2.png');
+						}
+					}
+					&:nth-child(3){
+						.box{
+							background-image: url('../../assets/dispatch/zs3.png');
+						}
+					}
+					&:nth-child(4){
+						.box{
+							background-image: url('../../assets/dispatch/zs4.png');
+						}
+					}
+					&:nth-child(5){
+						.box{
+							background-image: url('../../assets/dispatch/zs5.png');
+						}
+					}
+					&:nth-child(6){
+						.box{
+							background-image: url('../../assets/dispatch/zs6.png');
+						}
 					}
 				}
 			}
 			&.list{
 				width: 100%;
-				height: calc(100% - 300px);
+				height: calc(100% - 298px);
 				.panel-body{
 					width: 100%;
 					height: calc(100% - 53px);
@@ -192,9 +210,16 @@
 						position: absolute;
 					}
 				}
+				.ivu-list-item{
+					&:first-child{
+						padding-top: 0px;
+					}
+				}
 				.ivu-list-item-meta{
+						margin-bottom: 0px;
 					.ivu-list-item-meta-title{
 						color: white;
+						margin-bottom: 0px;
 					}
 				}
 				.ivu-list-item-action{
